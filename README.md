@@ -120,14 +120,39 @@ The startup wants to extract their `logs` and `songs` data from S3, stage them i
 
 ## How To Run
 
+### Prerequisite
+
+-   Prepare the Python environment by typing the following command into the Terminal
+
+    ```
+    $ pip install -r requirements.txt
+    ```
+
+-   AWS Account.
+
+-   IAM role with AWS service as Redshift-Customizable and permissions set to s3 read only access.
+
+-   Security group with inbound rules appropriately set as below:
+
+    ```
+    Type: Custom TCP Rule.
+    Protocol: TCP.
+    Port Range: 5439,
+    Source: Custom IP, with 0.0.0.0/0
+    ```
+
+-   Set AWS variables in the `dwh.cfg` file
+
+### Running scripts
+
 -   In order to work with the project you first need to run the `create_redshift_cluster.py` to create the necessary recources on AWS.
 
 -   You can execute the one of the following command inside a python environment to run the `create_redshift_cluster.py`
 
     ```
-    python create_redshift_cluster.py
+    $ python create_redshift_cluster.py
     or
-    python3 create_redshift_cluster.py
+    $ python3 create_redshift_cluster.py
     ```
 
 -   After creating the AWS resources you need to run the `create_tables.py` at least once to create the tables in the database hosted on Redshift.
@@ -135,17 +160,17 @@ The startup wants to extract their `logs` and `songs` data from S3, stage them i
 -   To run the `create_tables.py` execute one of the following command
 
     ```
-    python create_tables.py
+    $ python create_tables.py
     or
-    python3 create_tables.py
+    $ python3 create_tables.py
     ```
 
 -   Finally, you need to run the `etl.py` script to load the data into Redshift. You can execute one of the following command inside a python environment to run the `etl.py`
 
     ```
-    python etl.py
+    $ python etl.py
     or
-    python3 etl.py
+    $ python3 etl.py
     ```
 
 <p align="right">(<a href="#top">back to top</a>)</p>
